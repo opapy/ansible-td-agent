@@ -12,7 +12,7 @@
   file: path=/etc/td-agent/conf.d state=directory owner=root group=root mode=0755
 - name: install plugin
   shell: /usr/lib64/fluent/ruby/bin/fluent-gem install {{ item.name }} -v {{ item.version }}
-  with_items: {{ fluent_plugins }}
+  with_items: {{ td_agent_plugins }}
 
 - name: restart
   notify: restart nginx
