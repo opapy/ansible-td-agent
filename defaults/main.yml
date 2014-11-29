@@ -1,0 +1,7 @@
+# example
+#fluent_plugins:
+#  - {"name": "fluent-plugin-forest", "version": 0.3.0}
+#  - {"name": "fluent-plugin-s3", "version": 0.4.3}
+fluent_plugins: []
+
+td_agent_buffer_path: /var/log/td-agent/buffer
