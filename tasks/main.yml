@@ -8,7 +8,7 @@
 # TODO: rbenvでsandboxを作成してソースからインストールする
 - name: install td-agent
   shell: curl -L http://toolbelt.treasuredata.com/sh/install-redhat.sh | sh
-  when: result_installed_version.get('stderr') == ''
+  when: result_installed_version.get('stderr') != ''
 
 # configure
 - name: mkdir {{ td_agent_buffer_path }} 
