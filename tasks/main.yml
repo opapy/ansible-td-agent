@@ -1,18 +1,23 @@
+- name: get currently installed version
+  shell: td-agent --version"
+  register: result_installed_version 
+  always_run: yes
+  ignore_errors: True
+
 # install td-agent, バージョン指定できないんですけど
 # TODO: rbenvでsandboxを作成してソースからインストールする
 - name: install td-agent
   shell: curl -L http://toolbelt.treasuredata.com/sh/install-redhat.sh | sh
+  when: result_installed_version.get('stderr') == ''
 
 # configure
-- name: configure
-  template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf
 - name: mkdir {{ td_agent_buffer_path }} 
   file: path={{ td_agent_buffer_path }} state=directory owner=td-agent group=td-agent mode=0755
 - name: mkdir conf.d
   file: path=/etc/td-agent/conf.d state=directory owner=root group=root mode=0755
 - name: install plugin
   shell: /usr/lib64/fluent/ruby/bin/fluent-gem install {{ item.name }} -v {{ item.version }}
-  with_items: {{ td_agent_plugins }}
-
-- name: restart
-  notify: restart nginx
+  with_items: td_agent_plugins
+- name: configure
+  template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf
+  notify: restart td-agent
