@@ -1,5 +1,5 @@
 - name: get currently installed version
-  shell: td-agent --version"
+  shell: td-agent --version
   register: result_installed_version 
   always_run: yes
   ignore_errors: True
