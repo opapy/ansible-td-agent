@@ -20,4 +20,6 @@
   with_items: td_agent_plugins
 - name: configure
   template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf
-  notify: restart td-agent
+  changed_when: true
+  notify:
+    - restart td-agent
