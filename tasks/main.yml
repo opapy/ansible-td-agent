@@ -1,3 +1,7 @@
+- name: install dependencies
+  yum: name={{ item }} state=present
+  with_items: td_agent_yum_dependencies
+
 - name: get currently installed version
   shell: td-agent --version
   register: result_installed_version 
@@ -16,7 +20,7 @@
 - name: mkdir conf.d
   file: path=/etc/td-agent/conf.d state=directory owner=root group=root mode=0755
 - name: install plugin
-  shell: /usr/lib64/fluent/ruby/bin/fluent-gem install {{ item.name }} -v {{ item.version }}
+  shell: /usr/lib64/fluent/ruby/bin/fluent-gem install --no-ri --no-rdoc {{ item.name }} -v {{ item.version }}
   with_items: td_agent_plugins
 - name: configure
   template: src=td-agent.conf.j2 dest=/etc/td-agent/td-agent.conf

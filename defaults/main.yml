@@ -3,5 +3,7 @@
 #  - {"name": "fluent-plugin-forest", "version": 0.3.0}
 #  - {"name": "fluent-plugin-s3", "version": 0.4.3}
 td_agent_plugins: []
+td_agent_yum_dependencies:
+  - curl-devel
 
 td_agent_buffer_path: /var/log/td-agent/buffer
