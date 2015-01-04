@@ -5,5 +5,6 @@
 td_agent_plugins: []
 td_agent_yum_dependencies:
   - curl-devel
+  - gcc
 
 td_agent_buffer_path: /var/log/td-agent/buffer
