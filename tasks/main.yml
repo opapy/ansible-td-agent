@@ -13,6 +13,8 @@
 - name: install td-agent
   shell: curl -L http://toolbelt.treasuredata.com/sh/install-redhat.sh | sh
   when: result_installed_version.get('stderr') != ''
+- name: chkconfig on
+  shell: chkconfig td-agent on
 
 # configure
 - name: mkdir {{ td_agent_buffer_path }} 
